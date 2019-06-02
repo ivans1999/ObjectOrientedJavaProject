@@ -109,7 +109,7 @@ public class ZdrSistem {
 
 	public void ucitajKnjizicu(String imeFajla) {
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -131,7 +131,7 @@ public class ZdrSistem {
 	public void snimiKnjizicu(String imeFajla) {
 
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (ZdravstvenaKnjizica knjizica : knjizice) {
 				content += knjizica.getBrojKnjizice() + "|" + knjizica.getDatumIsteka() + "|"
@@ -148,7 +148,7 @@ public class ZdrSistem {
 
 	public void ucitajLekare(String imeFajla) {
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -180,7 +180,7 @@ public class ZdrSistem {
 
 	public void snimiLekara(String imeFajla) {
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (Lekar lekar : lekari) {
 				content += lekar.getIme() + "|" + lekar.getPrezime() + "|" + lekar.getJmbg() + "|" + lekar.getPol()
@@ -200,12 +200,11 @@ public class ZdrSistem {
 	public void ucitajPacijenta(String imeFajla) {
 
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] split = line.split("\\|");
-//				int l = split.length;
 				String ime = split[0];
 				String prezime = split[1];
 				String jmbg = split[2];
@@ -245,7 +244,7 @@ public class ZdrSistem {
 	public void snimiPacijenta(String imeFajla) {
 
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (Pacijent pacijent : pacijenti) {
 				content += pacijent.getIme() + "|" + pacijent.getPrezime() + "|" + pacijent.getJmbg() + "|"
@@ -264,7 +263,7 @@ public class ZdrSistem {
 	public void ucitajSestru(String imeFajla) {
 
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -296,7 +295,7 @@ public class ZdrSistem {
 	public void snimiSestru(String imeFajla) {
 
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (Medicinskasestra sestra : sestre) {
 				content += sestra.getIme() + "|" + sestra.getPrezime() + "|" + sestra.getJmbg() + "|" + sestra.getPol()
@@ -315,7 +314,7 @@ public class ZdrSistem {
 	public void ucitajPreglede(String imeFajla) {
 
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -350,7 +349,7 @@ public class ZdrSistem {
 	public void snimiPreglede(String imeFajla) {
 
 		try {
-			File file = new File("src/fajlovi/" + imeFajla);
+			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (Pregledi pregled : pregledi) {
 				content += pregled.getID() + "|" + pregled.getPacijent() + "|" + pregled.getLekar() + "|" + pregled.getTermin() + "|"
