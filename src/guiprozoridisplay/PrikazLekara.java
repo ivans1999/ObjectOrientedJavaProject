@@ -20,11 +20,11 @@ import uloge.Lekar;
 
 public class PrikazLekara extends JFrame {
 
-	private ImageIcon addIcon = new ImageIcon(getClass().getResource("/slike/add.gif"));
+	private ImageIcon addIcon = new ImageIcon(getClass().getResource("/imgGui/add.gif"));
 	private JButton btnAdd = new JButton(addIcon);
-	private ImageIcon editIcon = new ImageIcon(getClass().getResource("/slike/edit.gif"));
+	private ImageIcon editIcon = new ImageIcon(getClass().getResource("/imgGui/edit.gif"));
 	private JButton btnEdit = new JButton(editIcon);
-	private ImageIcon removeIcon = new ImageIcon(getClass().getResource("/slike/remove.gif"));
+	private ImageIcon removeIcon = new ImageIcon(getClass().getResource("/imgGui/remove.gif"));
 	private JButton btnRemove = new JButton(removeIcon);
 	private JToolBar toolBar = new JToolBar();
 	private JTable lekariTabela;
