@@ -1,6 +1,5 @@
 package uloge;
 
-import uloge.Medicinskasestra;
 import uloge.Osoba;
 
 public class Medicinskasestra extends Osoba {

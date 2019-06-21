@@ -16,7 +16,7 @@ import uloge.Osoba;
 
 public class Login extends JFrame {
 	
-	private JLabel lblPoruka=new JLabel("Dobrodosli. Molimo da se prijavite.");
+	private JLabel lblPoruka=new JLabel("Dobrodosli, molimo Vas da se prijavite.");
 	private JLabel lblKorisnickoIme=new JLabel("Korisnicko ime");
 	private JTextField txtKorisnickoIme=new JTextField(20);
 	private JLabel lblSifra= new JLabel("Sifra");

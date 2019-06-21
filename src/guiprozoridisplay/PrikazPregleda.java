@@ -21,11 +21,11 @@ import pregledi.Pregledi;
 
 public class PrikazPregleda extends JFrame{
 	
-	private ImageIcon addIcon = new ImageIcon(getClass().getResource("/slike/add.gif"));
+	private ImageIcon addIcon = new ImageIcon(getClass().getResource("/imgGui/add.gif"));
 	private JButton btnAdd = new JButton(addIcon);
-	private ImageIcon editIcon = new ImageIcon(getClass().getResource("/slike/edit.gif"));
+	private ImageIcon editIcon = new ImageIcon(getClass().getResource("/imgGui/edit.gif"));
 	private JButton btnEdit = new JButton(editIcon);
-	private ImageIcon removeIcon = new ImageIcon(getClass().getResource("/slike/remove.gif"));
+	private ImageIcon removeIcon = new ImageIcon(getClass().getResource("/imgGui/remove.gif"));
 	private JButton btnRemove = new JButton(removeIcon);
 	private JToolBar toolBar = new JToolBar();
 	private JTable preglediTabela;
@@ -46,7 +46,6 @@ public class PrikazPregleda extends JFrame{
 		toolBar.add(btnEdit);
 		toolBar.add(btnRemove);
 		add(toolBar, BorderLayout.NORTH);
-//		112|123477789|123456789|25-05-2019|soba23|Zakazan|
 		String[] zaglavlje = new String[] { "Id", "Jmbg Pacijenta", "Jmbg Lekara", "Datum pregleda", "Soba pregleda", "Status pregleda"};
 		Object[][] podatak = new Object[sistem.getPregledi().size()][zaglavlje.length];
 		for (int i = 0; i < sistem.getPregledi().size(); i++) {
