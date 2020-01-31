@@ -1,2 +1,2 @@
-Nina|Petrovic|123454323|Zenski|Jerkovic 43|221543333|nina|petro|Sestra|7000.0|Stomatoloska
-Ana|Milutinov|123453459|Zenski|Radnicka 26|1234231|ana|milutinov|Sestra|3000.0|Ginekoloska
+Nina|Petrovic|123456333|1|Marka Gloginje 22|221222333|nina|petro|Sestra|25000.0|1
+Ana|Stan|123456789|1|Rudnicka 15|1234568|ana|stan|Sestra|35000.0|1

@@ -1,25 +1,29 @@
 package pregledi;
 
+import java.util.GregorianCalendar;
+
+import uloge.Lekar;
+import uloge.Pacijent;
 
 public class Pregledi {
 	
 	private int ID;
-	private String pacijent;
-	private String lekar;
-	private String termin;
+	private Pacijent pacijent;
+	private Lekar lekar;
+	private GregorianCalendar termin;
 	private String soba;
-	private String status;
+	private StatusPregleda status;
 	
 	public Pregledi() {
 		this.ID=0;
-		this.pacijent = "";
-		this.lekar = "";
-		this.termin = "";
+		this.pacijent = new Pacijent();
+		this.lekar = new Lekar();
+		this.termin = new GregorianCalendar();
 		this.soba = "";
-		this.status = "";
+		this.status = StatusPregleda.Zatrazen;
 	}
 
-	public Pregledi(int ID,String pacijent, String lekar, String termin, String soba, String status) {
+	public Pregledi(int ID,Pacijent pacijent, Lekar lekar, GregorianCalendar termin, String soba, StatusPregleda status) {
 		super();
 		this.ID=ID;
 		this.pacijent = pacijent;
@@ -39,27 +43,27 @@ public class Pregledi {
 		ID = iD;
 	}
 
-	public String getPacijent() {
+	public Pacijent getPacijent() {
 		return pacijent;
 	}
 
-	public void setPacijent(String pacijent) {
+	public void setPacijent(Pacijent pacijent) {
 		this.pacijent = pacijent;
 	}
 
-	public String getLekar() {
+	public Lekar getLekar() {
 		return lekar;
 	}
 
-	public void setLekar(String lekar) {
+	public void setLekar(Lekar lekar) {
 		this.lekar = lekar;
 	}
 
-	public String getTermin() {
+	public GregorianCalendar getTermin() {
 		return termin;
 	}
 
-	public void setTermin(String termin) {
+	public void setTermin(GregorianCalendar termin) {
 		this.termin = termin;
 	}
 
@@ -71,11 +75,11 @@ public class Pregledi {
 		this.soba = soba;
 	}
 
-	public String getStatus() {
+	public StatusPregleda getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusPregleda status) {
 		this.status = status;
 	}
 

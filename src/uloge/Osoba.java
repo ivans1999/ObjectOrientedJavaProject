@@ -7,7 +7,7 @@ public abstract class Osoba {
 	private String ime;
 	private String prezime;
 	private String jmbg;
-	private String pol;
+	private Pol pol;
 	private String adresa;
 	private String brTelefona;
 	private String korisnicko;
@@ -18,7 +18,7 @@ public abstract class Osoba {
 		this.ime = "";
 		this.prezime = "";
 		this.jmbg = "";
-		this.pol = "";
+		this.pol = Pol.Muski;
 		this.adresa = "";
 		this.brTelefona = "";
 		this.korisnicko = "";
@@ -26,7 +26,7 @@ public abstract class Osoba {
 		this.uloga = "";
 	}
 
-	public Osoba(String ime, String prezime, String jmbg, String pol, String adresa, String brTelefona,
+	public Osoba(String ime, String prezime, String jmbg, Pol pol, String adresa, String brTelefona,
 			String korisnicko, String lozinka, String uloga) {
 		super();
 		this.ime = ime;
@@ -76,11 +76,11 @@ public abstract class Osoba {
 		this.jmbg = jmbg;
 	}
 
-	public String getPol() {
+	public Pol getPol() {
 		return pol;
 	}
 
-	public void setPol(String pol) {
+	public void setPol(Pol pol) {
 		this.pol = pol;
 	}
 

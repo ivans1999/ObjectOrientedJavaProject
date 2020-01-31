@@ -1,21 +1,22 @@
 package uloge;
 
+import java.util.GregorianCalendar;
 
 public class ZdravstvenaKnjizica {
 	
 	private String brojKnjizice;
-	private String datumIsteka;
+	private GregorianCalendar datumIsteka;
 	private String jmbgPacijenta;
-	private int kategorijaOsiguranja;
+	private KategorijaOsiguranja kategorijaOsiguranja;
 	
 	public ZdravstvenaKnjizica() {
 		this.brojKnjizice = "";
-		this.datumIsteka = "";
+		this.datumIsteka = new GregorianCalendar();
 		this.jmbgPacijenta = "";
-		this.kategorijaOsiguranja = 0;
+		this.kategorijaOsiguranja = KategorijaOsiguranja.Prva;
 	}
 
-	public ZdravstvenaKnjizica(String brojKnjizice,String datumIsteka,String jmbgPacijenta, int kategorijaOsiguranja) {
+	public ZdravstvenaKnjizica(String brojKnjizice,GregorianCalendar datumIsteka,String jmbgPacijenta, KategorijaOsiguranja kategorijaOsiguranja) {
 		super();
 		this.brojKnjizice = brojKnjizice;
 		this.datumIsteka = datumIsteka;
@@ -39,19 +40,19 @@ public class ZdravstvenaKnjizica {
 		this.brojKnjizice = brojKnjizice;
 	}
 
-	public String getDatumIsteka() {
+	public GregorianCalendar getDatumIsteka() {
 		return datumIsteka;
 	}
 
-	public void setDatumIsteka(String datumIsteka) {
+	public void setDatumIsteka(GregorianCalendar datumIsteka) {
 		this.datumIsteka = datumIsteka;
 	}
 
-	public int getKategorijaOsiguranja() {
+	public KategorijaOsiguranja getKategorijaOsiguranja() {
 		return kategorijaOsiguranja;
 	}
 
-	public void setKategorijaOsiguranja(int kategorijaOsiguranja) {
+	public void setKategorijaOsiguranja(KategorijaOsiguranja kategorijaOsiguranja) {
 		this.kategorijaOsiguranja = kategorijaOsiguranja;
 	}
 

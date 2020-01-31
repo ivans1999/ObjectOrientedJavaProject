@@ -5,15 +5,15 @@ import uloge.Osoba;
 public class Medicinskasestra extends Osoba {
 
 	private double plata;
-	private String sluzba;
+	private SluzbeZaSestru sluzba;
 
 	public Medicinskasestra() {
 		this.plata = 0;
-		this.sluzba = "";
+		this.sluzba = SluzbeZaSestru.OpstaMedicina;
 	}
 
-	public Medicinskasestra(String ime, String prezime, String jmbg, String pol, String adresa, String brTelefona,
-			String korisnicko, String lozinka, String uloga, double plata, String sluzba) {
+	public Medicinskasestra(String ime, String prezime, String jmbg, Pol pol, String adresa, String brTelefona,
+			String korisnicko, String lozinka, String uloga, double plata, SluzbeZaSestru sluzba) {
 		super(ime, prezime, jmbg, pol, adresa, brTelefona, korisnicko, lozinka, uloga);
 		this.plata = plata;
 		this.sluzba = sluzba;
@@ -33,11 +33,11 @@ public class Medicinskasestra extends Osoba {
 		this.plata = plata;
 	}
 
-	public String getSluzba() {
+	public SluzbeZaSestru getSluzba() {
 		return sluzba;
 	}
 
-	public void setSluzba(String sluzba) {
+	public void setSluzba(SluzbeZaSestru sluzba) {
 		this.sluzba = sluzba;
 	}
 

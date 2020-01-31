@@ -1,22 +1,21 @@
 package uloge;
 
-
-
+import uloge.SluzbeZaLekara;
 
 public class Lekar extends Osoba {
 	
 	private double plata;
 	private String specijalizacija;
-	private String sluzba;
+	private SluzbeZaLekara sluzba;
 	
 	public Lekar() {
 		this.plata = 0;
 		this.specijalizacija = "";
-		this.sluzba = "";
+		this.sluzba = SluzbeZaLekara.OpstaMedicina;
 	}
 
-	public Lekar(String ime, String prezime, String jmbg, String pol, String adresa, String brTelefona,
-			String korisnicko, String lozinka, String uloga,double plata, String specijalizacija, String sluzba) {
+	public Lekar(String ime, String prezime, String jmbg, Pol pol, String adresa, String brTelefona,
+			String korisnicko, String lozinka, String uloga,double plata, String specijalizacija, SluzbeZaLekara sluzba) {
 		super(ime,prezime,jmbg,pol,adresa,brTelefona,korisnicko,lozinka,uloga);
 		this.plata = plata;
 		this.specijalizacija = specijalizacija;
@@ -46,11 +45,11 @@ public class Lekar extends Osoba {
 		this.specijalizacija = specijalizacija;
 	}
 
-	public String getSluzba() {
+	public SluzbeZaLekara getSluzba() {
 		return sluzba;
 	}
 
-	public void setSluzba(String sluzba) {
+	public void setSluzba( SluzbeZaLekara sluzba) {
 		this.sluzba = sluzba;
 	}
 

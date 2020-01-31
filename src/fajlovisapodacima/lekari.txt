@@ -1,3 +1,3 @@
-Marko|Markovic|123456789|Muski|Futoska 13|111222333|marko|markovic|Lekar|4000.0|Stomatolog|Stomatoloska
-Milan|Maric|5787001834162|Muski|Rudnicka 15|0637169382|milan|maric|Lekar|20000.0|Ortoped|Ortopedska
-Doctor|House|1263999815662|Muski|Knez Mihailova 4|0637169371|doctor|house|Lekar|80000.0|Ginekolog|Ginekoloska
+Marko|Markovic|123456789|2|Vojvodjanska 13|111222333|markan|markovic|Lekar|45000.0|Stomatolog|1
+Milan|Maric|5787001834162|Muski|Rudnicka 15|0637169382|milan|maric|Lekar|20000.0|Ortoped|3
+Mirko|Mirkovic|741852|2|AdresaA|123456|mirko|mirkovic|Lekar|50000.0|Pedijatar|2

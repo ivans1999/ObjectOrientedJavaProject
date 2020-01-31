@@ -6,25 +6,32 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import pregledi.Pregledi;
+import uloge.KategorijaOsiguranja;
+import uloge.Pol;
+import uloge.SluzbeZaLekara;
+import uloge.SluzbeZaSestru;
 import uloge.Lekar;
 import uloge.Medicinskasestra;
 import uloge.Osoba;
 import uloge.Pacijent;
 import uloge.ZdravstvenaKnjizica;
+import pregledi.StatusPregleda;
 
 public class ZdrSistem {
 
-	private ArrayList<String> lista1 = new ArrayList<String>();
-	private ArrayList<Pregledi> preglediPacijenata = new ArrayList<Pregledi>();
 	private ArrayList<Medicinskasestra> sestre;
 	private ArrayList<Lekar> lekari;
 	private ArrayList<Osoba> osobe;
 	private ArrayList<Pacijent> pacijenti;
 	private ArrayList<Pregledi> pregledi;
 	private ArrayList<ZdravstvenaKnjizica> knjizice;
+	SimpleDateFormat formatKnjizice = new SimpleDateFormat("dd.MM.yyyy");
+	SimpleDateFormat formatTermina = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 
 	public ZdrSistem() {
 		this.sestre = new ArrayList<Medicinskasestra>();
@@ -106,6 +113,21 @@ public class ZdrSistem {
 	public void setKnjizice(ArrayList<ZdravstvenaKnjizica> knjizice) {
 		this.knjizice = knjizice;
 	}
+	public SimpleDateFormat getFormatKnjizice() {
+		return formatKnjizice;
+	}
+
+	public void setFormatKnjizice(SimpleDateFormat formatKnjizice) {
+		this.formatKnjizice = formatKnjizice;
+	}
+
+	public SimpleDateFormat getFormatTermina() {
+		return formatTermina;
+	}
+
+	public void setFormatTermina(SimpleDateFormat formatTermina) {
+		this.formatTermina = formatTermina;
+	}
 
 	public void ucitajKnjizicu(String imeFajla) {
 		try {
@@ -115,9 +137,10 @@ public class ZdrSistem {
 			while ((line = reader.readLine()) != null) {
 				String[] split = line.split("\\|");
 				String broj = split[0];
-				String datumIsteka = split[1];
+				GregorianCalendar datumIsteka = SamoDatum(split[1]);
 				String jmbgPacijenta = split[2];
-				int kategorija = Integer.parseInt(split[3]);
+				int kategorijaInt = Integer.parseInt(split[3]);
+				KategorijaOsiguranja kategorija = KategorijaOsiguranja.fromInt(kategorijaInt);
 				ZdravstvenaKnjizica knjizica = new ZdravstvenaKnjizica(broj, datumIsteka, jmbgPacijenta, kategorija);
 				knjizice.add(knjizica);
 			}
@@ -134,8 +157,9 @@ public class ZdrSistem {
 			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (ZdravstvenaKnjizica knjizica : knjizice) {
-				content += knjizica.getBrojKnjizice() + "|" + knjizica.getDatumIsteka() + "|"
-						+ knjizica.getJmbgPacijenta() + "|" + knjizica.getKategorijaOsiguranja() + "\n";
+				content += knjizica.getBrojKnjizice() + "|" + VremeUString(knjizica.getDatumIsteka(), formatKnjizice)
+						+ "|" + knjizica.getJmbgPacijenta() + "|"
+						+ KategorijaOsiguranja.toInt(knjizica.getKategorijaOsiguranja()) + "\n";
 			}
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			writer.write(content);
@@ -152,11 +176,12 @@ public class ZdrSistem {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
-				String[] split = line.split("\\|");			
+				String[] split = line.split("\\|");
 				String ime = split[0];
 				String prezime = split[1];
 				String jmbg = split[2];
-				String pol = split[3];
+				int polInt = Integer.parseInt(split[3]);
+				Pol pol = Pol.fromInt(polInt);
 				String adresa = split[4];
 				String brTelefona = split[5];
 				String korisnicko = split[6];
@@ -164,7 +189,8 @@ public class ZdrSistem {
 				String uloga = split[8];
 				double plata = Double.parseDouble(split[9]);
 				String specijalizacija = split[10];
-				String sluzba = split[11];
+				int sluzbaInt = Integer.parseInt(split[11]);
+				SluzbeZaLekara sluzba = SluzbeZaLekara.fromInt(sluzbaInt);
 				Lekar lekar = new Lekar(ime, prezime, jmbg, pol, adresa, brTelefona, korisnicko, lozinka, uloga, plata,
 						specijalizacija, sluzba);
 				lekari.add(lekar);
@@ -183,10 +209,11 @@ public class ZdrSistem {
 			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (Lekar lekar : lekari) {
-				content += lekar.getIme() + "|" + lekar.getPrezime() + "|" + lekar.getJmbg() + "|" + lekar.getPol()
-						+ "|" + lekar.getAdresa() + "|" + lekar.getBrTelefona() + "|" + lekar.getKorisnicko() + "|"
-						+ lekar.getLozinka() + "|" + lekar.getUloga() + "|" + lekar.getPlata() + "|"
-						+ lekar.getSpecijalizacija() + "|" + lekar.getSluzba() + "\n";
+				content += lekar.getIme() + "|" + lekar.getPrezime() + "|" + lekar.getJmbg() + "|"
+						+ Pol.toInt(lekar.getPol()) + "|" + lekar.getAdresa() + "|" + lekar.getBrTelefona() + "|"
+						+ lekar.getKorisnicko() + "|" + lekar.getLozinka() + "|" + lekar.getUloga() + "|"
+						+ lekar.getPlata() + "|" + lekar.getSpecijalizacija() + "|"
+						+ SluzbeZaLekara.toInt(lekar.getSluzba()) + "\n";
 			}
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			writer.write(content);
@@ -205,10 +232,12 @@ public class ZdrSistem {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] split = line.split("\\|");
+				// int l = split.length;
 				String ime = split[0];
 				String prezime = split[1];
 				String jmbg = split[2];
-				String pol = split[3];
+				int polInt = Integer.parseInt(split[3]);
+				Pol pol = Pol.fromInt(polInt);
 				String adresa = split[4];
 				String brTelefona = split[5];
 				String korisnicko = split[6];
@@ -216,20 +245,9 @@ public class ZdrSistem {
 				String uloga = split[8];
 				String jmbglekara = split[9];
 				Lekar izabraniLekar = new Lekar();
-				for (Pregledi pregled : pregledi) {
-					for (String id : lista1) {
-						if (id.equals(pregled.getID())) {
-							preglediPacijenata.add(pregled);
-						}
-					}
-				}
-				for (Lekar lekar : lekari) {
-					if (jmbglekara.equals(lekar.getJmbg())) {
-						izabraniLekar = lekar;
-					}
-				}
+				izabraniLekar = pronadjiLekara(jmbglekara);
 				Pacijent pacijent = new Pacijent(ime, prezime, jmbg, pol, adresa, brTelefona, korisnicko, lozinka,
-						uloga, izabraniLekar.getJmbg());
+						uloga, izabraniLekar);
 				dodajPacijenta(pacijent);
 				dodajOsobu(pacijent);
 			}
@@ -248,9 +266,9 @@ public class ZdrSistem {
 			String content = "";
 			for (Pacijent pacijent : pacijenti) {
 				content += pacijent.getIme() + "|" + pacijent.getPrezime() + "|" + pacijent.getJmbg() + "|"
-						+ pacijent.getPol() + "|" + pacijent.getAdresa() + "|" + pacijent.getBrTelefona() + "|"
-						+ pacijent.getKorisnicko() + "|" + pacijent.getLozinka() + "|" + pacijent.getUloga() + "|"
-						+ pacijent.getIzabraniLekar()  + "\n";
+						+ Pol.toInt(pacijent.getPol()) + "|" + pacijent.getAdresa() + "|" + pacijent.getBrTelefona()
+						+ "|" + pacijent.getKorisnicko() + "|" + pacijent.getLozinka() + "|" + pacijent.getUloga() + "|"
+						+ pacijent.getIzabraniLekar().getJmbg() + "\n";
 			}
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			writer.write(content);
@@ -271,14 +289,16 @@ public class ZdrSistem {
 				String ime = split[0];
 				String prezime = split[1];
 				String jmbg = split[2];
-				String pol = split[3];
+				int polInt = Integer.parseInt(split[3]);
+				Pol pol = Pol.fromInt(polInt);
 				String adresa = split[4];
 				String brTelefona = split[5];
 				String korisnicko = split[6];
 				String lozinka = split[7];
 				String uloga = split[8];
 				double plata = Double.parseDouble(split[9]);
-				String sluzba = split[10];
+				int sluzbaInt = Integer.parseInt(split[10]);
+				SluzbeZaSestru sluzba = SluzbeZaSestru.fromInt(sluzbaInt);
 				Medicinskasestra sestra = new Medicinskasestra(ime, prezime, jmbg, pol, adresa, brTelefona, korisnicko,
 						lozinka, uloga, plata, sluzba);
 				sestre.add(sestra);
@@ -298,10 +318,10 @@ public class ZdrSistem {
 			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (Medicinskasestra sestra : sestre) {
-				content += sestra.getIme() + "|" + sestra.getPrezime() + "|" + sestra.getJmbg() + "|" + sestra.getPol()
-						+ "|" + sestra.getAdresa() + "|" + sestra.getBrTelefona() + "|" + sestra.getKorisnicko() + "|"
-						+ sestra.getLozinka() + "|" + sestra.getUloga() + "|" + sestra.getPlata() + "|"
-						+ sestra.getSluzba() + "\n";
+				content += sestra.getIme() + "|" + sestra.getPrezime() + "|" + sestra.getJmbg() + "|"
+						+ Pol.toInt(sestra.getPol()) + "|" + sestra.getAdresa() + "|" + sestra.getBrTelefona() + "|"
+						+ sestra.getKorisnicko() + "|" + sestra.getLozinka() + "|" + sestra.getUloga() + "|"
+						+ sestra.getPlata() + "|" + SluzbeZaSestru.toInt(sestra.getSluzba()) + "\n";
 			}
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			writer.write(content);
@@ -322,20 +342,15 @@ public class ZdrSistem {
 				int id = Integer.parseInt(split[0]);
 				String jmbgPacijenta = split[1];
 				String jmbgLekara = split[2];
-				String termin = split[3];
+				GregorianCalendar termin = napraviDatumIVreme(split[3]);
 				String soba = split[4];
-				String status = split[5];
+				int statusInt = Integer.parseInt(split[5]);
+				StatusPregleda status = StatusPregleda.fromInt(statusInt);
 				Pacijent pacijentPregleda = new Pacijent();
 				Lekar lekarPregleda = new Lekar();
-				for (Lekar lekar : lekari) {
-					if (jmbgLekara.equals(lekar.getJmbg()))
-						lekarPregleda = lekar;
-				}
-				for (Pacijent pacijent : pacijenti) {
-					if (jmbgPacijenta.equals(pacijent.getJmbg()))
-						pacijentPregleda = pacijent;
-				}
-				Pregledi pregled = new Pregledi(id, pacijentPregleda.getJmbg(), lekarPregleda.getJmbg(), termin, soba, status);
+				lekarPregleda = pronadjiLekara(jmbgLekara);
+				pacijentPregleda = pronadjiPacijenta(jmbgPacijenta);
+				Pregledi pregled = new Pregledi(id, pacijentPregleda, lekarPregleda, termin, soba, status);
 				pregledi.add(pregled);
 			}
 			reader.close();
@@ -352,8 +367,9 @@ public class ZdrSistem {
 			File file = new File("src/fajlovisapodacima/" + imeFajla);
 			String content = "";
 			for (Pregledi pregled : pregledi) {
-				content += pregled.getID() + "|" + pregled.getPacijent() + "|" + pregled.getLekar() + "|" + pregled.getTermin() + "|"
-						+ pregled.getSoba() + "|" + pregled.getStatus() + "\n";
+				content += pregled.getID() + "|" + pregled.getPacijent().getJmbg() + "|" + pregled.getLekar().getJmbg()
+						+ "|" + VremeUString(pregled.getTermin(), formatTermina) + "|" + pregled.getSoba() + "|"
+						+ StatusPregleda.toInt(pregled.getStatus()) + "\n";
 			}
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 			writer.write(content);
@@ -381,7 +397,7 @@ public class ZdrSistem {
 		}
 		return null;
 	}
-	
+
 	public Medicinskasestra pronadjiSestru(String jmbg) {
 		for (Medicinskasestra sestra : sestre) {
 			if (sestra.getJmbg().equals(jmbg)) {
@@ -390,7 +406,7 @@ public class ZdrSistem {
 		}
 		return null;
 	}
-	
+
 	public Pacijent pronadjiPacijenta(String jmbg) {
 		for (Pacijent pacijent : pacijenti) {
 			if (pacijent.getJmbg().equals(jmbg)) {
@@ -401,12 +417,174 @@ public class ZdrSistem {
 	}
 
 	public Pregledi pretraziId(String id) {
+		int ID = Integer.parseInt(id);
 		for (Pregledi pregled : pregledi) {
-			if (id.equals(pregled.getID())) {
+			if (ID == pregled.getID()) {
 				return pregled;
 			}
 		}
 		return null;
 	}
 
+	public ZdravstvenaKnjizica pronadjiKnjizicu(String jmbg) {
+		for (ZdravstvenaKnjizica knjizica : knjizice) {
+			if (jmbg.equals(knjizica.getJmbgPacijenta())) {
+				return knjizica;
+			}
+		}
+		return null;
+	}
+
+	public int pronadjiNajveciId() {
+		int najveci = 0;
+		for (Pregledi pregled : pregledi) {
+			if (najveci < pregled.getID()) {
+				najveci = pregled.getID();
+			}
+		}
+		return najveci;
+	}
+
+	public int PronadjNajveciBr() {
+		int najveci = 0;
+		for (ZdravstvenaKnjizica knjizica : knjizice) {
+			if (najveci < Integer.parseInt(knjizica.getBrojKnjizice())) {
+				najveci = Integer.parseInt(knjizica.getBrojKnjizice());
+			}
+		}
+		return najveci;
+	}
+
+	public GregorianCalendar napraviDatumIVreme(String s) {
+		String[] split = s.split("\\ ");
+		String[] datum = split[0].split("\\.");
+		String[] vreme = split[1].split("\\:");
+		int dan = Integer.parseInt(datum[0]);
+		int mesec = Integer.parseInt(datum[1]);
+		int godina = Integer.parseInt(datum[2]);
+		int sat = Integer.parseInt(vreme[0]);
+		int minute = Integer.parseInt(vreme[1]);
+		GregorianCalendar termin = new GregorianCalendar(godina, mesec - 1, dan, sat, minute);
+		return termin;
+	}
+
+	public GregorianCalendar SamoDatum(String s) {
+		String[] vreme = s.split("\\.");
+		int dan = Integer.parseInt(vreme[0]);
+		int mesec = Integer.parseInt(vreme[1]);
+		int godina = Integer.parseInt(vreme[2]);
+		GregorianCalendar datum = new GregorianCalendar(godina, mesec - 1, dan);
+		return datum;
+	}
+
+	public String VremeUString(GregorianCalendar termin, SimpleDateFormat f) {
+		String s = f.format(termin.getTime());
+		return s;
+	}
+
+	public ArrayList<String> LekariJmbg() {
+		ArrayList<String> lista = new ArrayList<String>();
+		for (Lekar lekar : lekari) {
+			System.out.println(lekar.getJmbg());
+			lista.add(lekar.getJmbg());
+		}
+		return lista;
+	}
+
+	public double napraviRacun(KategorijaOsiguranja kategorija) {
+		double racun = 0;
+		if (kategorija == KategorijaOsiguranja.Prva) {
+			racun = 300;
+		}
+		if (kategorija == KategorijaOsiguranja.Druga) {
+			racun = 50;
+		}
+		if (kategorija == KategorijaOsiguranja.Treca) {
+			racun = 0;
+		}
+		return racun;
+	}
+
+	public ArrayList<Pregledi> pronadjiSvojePregledeLekar(String jmbg) {
+		ArrayList<Pregledi> pregLekara = new ArrayList<Pregledi>();
+		for (Pregledi pregled : pregledi) {
+			if ((pregled.getLekar().getJmbg().equals(jmbg)) && ((pregled.getStatus() == StatusPregleda.Zakazan)
+					|| (pregled.getStatus() == StatusPregleda.Otkazan)
+					|| (pregled.getStatus() == StatusPregleda.Zavrsen))) {
+				pregLekara.add(pregled);
+			}
+		}
+		return pregLekara;
+	}
+
+	public ArrayList<Pregledi> pronadjiSvojePregledePacijent(String jmbg) {
+		ArrayList<Pregledi> pregPacijenta = new ArrayList<Pregledi>();
+		for (Pregledi pregled : pregledi) {
+			if (pregled.getPacijent().getJmbg().equals(jmbg)) {
+				pregPacijenta.add(pregled);
+			}
+		}
+		return pregPacijenta;
+	}
+
+	public Osoba pronadjiKorisnicko(String korisnicko) {
+		for (Osoba osoba : osobe) {
+			if (osoba.getKorisnicko().equals(korisnicko)) {
+				return osoba;
+			}
+		}
+		return null;
+	}
+
+	public boolean proveriTermin(String s, String jmbg,int i) {
+		boolean ok = true;
+		Lekar lekar = pronadjiLekara(jmbg);
+		String samoDatum = odbaciVreme(s);
+		int vremeTrazenog = pretvoriSveUMinute(s);
+		for (Pregledi pregled : pregledi) {
+			String samoDatumPostojuceg = odbaciVreme(VremeUString(pregled.getTermin(), formatTermina));
+			int vremePostojuceg = pretvoriSveUMinute(VremeUString(pregled.getTermin(), formatTermina));
+			int vrednost = Math.abs(vremeTrazenog - vremePostojuceg);
+			if ((15 >= vrednost) && (poredjenje(samoDatum, samoDatumPostojuceg)) && (lekar == pregled.getLekar()) && ((pregled.getStatus() == StatusPregleda.Zakazan))) {
+					ok = false;
+			}
+		}
+		return ok;
+	}
+
+	public int pretvoriSveUMinute(String s) {
+		String[] terminS = s.split("\\ ");
+		String[] vremeS = terminS[1].split("\\:");
+		int sat = Integer.parseInt(vremeS[0]);
+		int min = Integer.parseInt(vremeS[1]);
+		int vreme = (sat * 60) + min;
+		return vreme;
+	}
+
+	public String odbaciVreme(String s) {
+		String[] termin = s.split("\\ ");
+		String samoDatum = termin[0];
+		return samoDatum;
+	}
+
+	public int samoSati(String s) {
+		String[] termin = s.split("\\ ");
+		int sat = Integer.parseInt(termin[1].split("\\:")[0]);
+		return sat;
+	}
+
+	public boolean poredjenje(String s1, String s2) {
+		String[] trazeniTermin = s1.split("\\.");
+		String[] postojuciTermin = s2.split("\\.");
+		int dan1 = Integer.parseInt(trazeniTermin[0]);
+		int dan2 = Integer.parseInt(postojuciTermin[0]);
+		int mesec1 = Integer.parseInt(trazeniTermin[1]);
+		int mesec2 = Integer.parseInt(postojuciTermin[1]);
+		int god1 = Integer.parseInt(trazeniTermin[2]);
+		int god2 = Integer.parseInt(postojuciTermin[2]);
+		if ((dan1 == dan2) && (mesec1 == mesec2) && (god1 == god2)) {
+			return true;
+		}
+		return false;
+	}
 }

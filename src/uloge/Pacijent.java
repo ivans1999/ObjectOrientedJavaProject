@@ -6,15 +6,15 @@ import uloge.ZdravstvenaKnjizica;
 
 public class Pacijent extends Osoba {
 	
-	private String izabraniLekar;
+	private Lekar izabraniLekar;
 	private ZdravstvenaKnjizica zdravstvena;
 	
 	public Pacijent() {
-		this.izabraniLekar = "";
+		this.izabraniLekar = new Lekar();
 	}
 
-	public Pacijent(String ime, String prezime, String jmbg, String pol, String adresa, String brTelefona,
-			String korisnicko, String lozinka, String uloga,String izabraniLekar) {
+	public Pacijent(String ime, String prezime, String jmbg, Pol pol, String adresa, String brTelefona,
+			String korisnicko, String lozinka, String uloga,Lekar izabraniLekar) {
 		super(ime,prezime,jmbg,pol,adresa,brTelefona,korisnicko,lozinka,uloga);
 		this.izabraniLekar = izabraniLekar;
 	}
@@ -25,11 +25,11 @@ public class Pacijent extends Osoba {
 		this.zdravstvena = original.zdravstvena;
 	}
 
-	public String getIzabraniLekar() {
+	public Lekar getIzabraniLekar() {
 		return izabraniLekar;
 	}
 
-	public void setIzabraniLekar(String izabraniLekar) {
+	public void setIzabraniLekar(Lekar izabraniLekar) {
 		this.izabraniLekar = izabraniLekar;
 	}
 	
