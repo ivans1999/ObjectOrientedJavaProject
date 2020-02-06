@@ -33,7 +33,7 @@ public class PrikazLekara extends JFrame {
 	public PrikazLekara(ZdrSistem sistem) {
 		this.sistem = sistem;
 		setTitle("Lista lekara");
-		setSize(700, 500);
+		setSize(800, 500);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		initGUI();
@@ -77,7 +77,7 @@ public class PrikazLekara extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DodavanjeLekaraPrikaz dlp=new DodavanjeLekaraPrikaz(sistem, null);
+				DodavanjeLekaraPrikaz dlp=new DodavanjeLekaraPrikaz(sistem, null,0);
 				dlp.setVisible(true);
 			}
 		});
@@ -93,7 +93,7 @@ public class PrikazLekara extends JFrame {
 					String jmbg = lekariTabela.getValueAt(red, 2).toString();
 					Lekar lekar = sistem.pronadjiLekara(jmbg);
 					if(lekar != null) {
-						DodavanjeLekaraPrikaz dLekara = new DodavanjeLekaraPrikaz(sistem, lekar);
+						DodavanjeLekaraPrikaz dLekara = new DodavanjeLekaraPrikaz(sistem, lekar,2);
 						dLekara.setVisible(true);
 					}else {
 						JOptionPane.showMessageDialog(null, "Nije moguce pronaci odabranog lekara!", "Greska", JOptionPane.ERROR_MESSAGE);

@@ -1,3 +1,7 @@
-Marko|Markovic|123456789|2|Vojvodjanska 13|111222333|markan|markovic|Lekar|45000.0|Stomatolog|1
-Milan|Maric|5787001834162|Muski|Rudnicka 15|0637169382|milan|maric|Lekar|20000.0|Ortoped|3
-Mirko|Mirkovic|741852|2|AdresaA|123456|mirko|mirkovic|Lekar|50000.0|Pedijatar|2
+Milos|Milosevic|123456789|2|Vojvodjanska 13|111222333|milos|milos|Lekar|45000.0|Stomatolog|1
+Jovan|Jovanovic|0503999810162|2|Vojvodjanska 89|0637169371|jova|jova|Lekar|50000.0|Ginekolog|1
+Mirko|Mirkovic|741852|2|Adresa6|123456|mirko|mirkovic|Lekar|50000.0|Pedijatar|2
+Luka|Lukic|74185200|2|Adresa10|123123|luka|lukic|Lekar|50000.0|Hirurg|3
+Zarko|Zarkovic|123456|2|Adresa 5|0001|zarko|00000|Lekar|50000.0|Hirurgija|2
+Mile|Milosevic|0001|2|Petra Drapsina 49|00000|miki|mile|Lekar|45000.0|Hirurg|3
+Ivan|Stankovic|2906999770017|2|Rudnicka 15|0600556613|ikac|kralj|Lekar|40000.0|Ginekolog|1

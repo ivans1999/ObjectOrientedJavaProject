@@ -1,2 +1,5 @@
-Nina|Petrovic|123456333|1|Marka Gloginje 22|221222333|nina|petro|Sestra|25000.0|1
-Ana|Stan|123456789|1|Rudnicka 15|1234568|ana|stan|Sestra|35000.0|1
+Nina|Petrovic|123456333|1|Futoska 33|221222333|nina|petro|Sestra|25000.0|1
+Mina|Minic|123456789|1|Fruskogorska 22|1234568|mina|minic|Sestra|35000.0|1
+Ana|Anic|963963636|1|Adresa2|123456|ana|anic|Sestra|25000.0|1
+Mila|Milic|96396313321|1|Adresa13|11111111|mila|milic|Sestra|25000.0|1
+Mira|Mirkovic|9639632333|1|Adresa 32|1222232321|mira|mirkovic|Sestra|26000.0|1

@@ -76,7 +76,7 @@ public class PrikazSestara extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DodavanjeSestaraPrikaz dlp=new DodavanjeSestaraPrikaz(sistem, null);
+				DodavanjeSestaraPrikaz dlp=new DodavanjeSestaraPrikaz(sistem, null,0);
 				dlp.setVisible(true);
 			}
 		});
@@ -92,10 +92,10 @@ public class PrikazSestara extends JFrame {
 					String jmbg = sestreTabela.getValueAt(red, 2).toString();
 					Medicinskasestra sestra = sistem.pronadjiSestru(jmbg);
 					if(sestra != null) {
-						DodavanjeSestaraPrikaz dSestara = new DodavanjeSestaraPrikaz(sistem, sestra);
+						DodavanjeSestaraPrikaz dSestara = new DodavanjeSestaraPrikaz(sistem, sestra,2);
 						dSestara.setVisible(true);
 					}else {
-						JOptionPane.showMessageDialog(null, "Nije moguce pronaci odabranog lekara!", "Greska", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Nije moguce pronaci odabranu sestru!", "Greska", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				

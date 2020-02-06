@@ -15,7 +15,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import funk.ZdrSistem;
+import guiprozoriadd.DodavanjeKnjizicePrikaz;
+import guiprozoriadd.DodavanjeLekaraPrikaz;
 import guiprozoriadd.DodavanjePacijenataPrikaz;
+import uloge.Lekar;
+import uloge.ZdravstvenaKnjizica;
 import uloge.Pacijent;
 
 public class PrikazPacijenata extends JFrame {
@@ -26,6 +30,8 @@ public class PrikazPacijenata extends JFrame {
 	private JButton btnEdit = new JButton(editIcon);
 	private ImageIcon removeIcon = new ImageIcon(getClass().getResource("/imgGui/remove.gif"));
 	private JButton btnRemove = new JButton(removeIcon);
+	private JButton btnPrikaziKnjizicu = new JButton("Prikazi knjizicu");
+	private JButton btnPrikaziLekara = new JButton("Prikazi izabranog lekara");
 	private JToolBar toolBar = new JToolBar();
 	private JTable pacijentiTabela;
 	private ZdrSistem sistem;
@@ -44,6 +50,8 @@ public class PrikazPacijenata extends JFrame {
 		toolBar.add(btnAdd);
 		toolBar.add(btnEdit);
 		toolBar.add(btnRemove);
+		toolBar.add(btnPrikaziKnjizicu);
+		toolBar.add(btnPrikaziLekara);
 		add(toolBar, BorderLayout.NORTH);
 		String[] zaglavlje = new String[] { "Ime", "Prezime", "JMBG", "Pol ", "Adresa", "Broj telefona", "Korisnicko",
 				"Lozinka", "Uloga", "Izabrani lekar"};
@@ -59,7 +67,7 @@ public class PrikazPacijenata extends JFrame {
 			podatak[i][6] = pacijent.getKorisnicko();
 			podatak[i][7] = pacijent.getLozinka();
 			podatak[i][8] = pacijent.getUloga();
-			podatak[i][9] = pacijent.getIzabraniLekar();
+			podatak[i][9] = pacijent.getIzabraniLekar().getJmbg();
 		}
 		DefaultTableModel model = new DefaultTableModel(podatak, zaglavlje);
 		pacijentiTabela = new JTable(model);
@@ -75,7 +83,7 @@ public class PrikazPacijenata extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DodavanjePacijenataPrikaz dp=new DodavanjePacijenataPrikaz(sistem, null);
+				DodavanjePacijenataPrikaz dp=new DodavanjePacijenataPrikaz(sistem, null,0);
 				dp.setVisible(true);
 			}
 		});
@@ -91,7 +99,7 @@ public class PrikazPacijenata extends JFrame {
 					String jmbg = pacijentiTabela.getValueAt(red, 2).toString();
 					Pacijent pacijent = sistem.pronadjiPacijenta(jmbg);
 					if(pacijent != null) {
-						DodavanjePacijenataPrikaz dPacijenta = new DodavanjePacijenataPrikaz(sistem, pacijent);
+						DodavanjePacijenataPrikaz dPacijenta = new DodavanjePacijenataPrikaz(sistem, pacijent,2);
 						dPacijenta.setVisible(true);
 					}else {
 						JOptionPane.showMessageDialog(null, "Nije moguce pronaci odabranog pacijenta!", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -116,15 +124,50 @@ public class PrikazPacijenata extends JFrame {
 							DefaultTableModel model = (DefaultTableModel) pacijentiTabela.getModel();
 							if(pacijent instanceof Pacijent) {
 								sistem.getPacijenti().remove(pacijent);
+								ZdravstvenaKnjizica knjizica=sistem.pronadjiKnjizicu(jmbg);
+								sistem.getKnjizice().remove(knjizica);
 							}
 							model.removeRow(red);
-							sistem.snimiLekara("pacijenti.txt");
+							sistem.snimiKnjizicu("zdravstvena.txt");
+							sistem.snimiPacijenta("pacijenti.txt");
 						}
 					}else {
 						JOptionPane.showMessageDialog(null, "Nije moguce pronaci odabranog pacijenta!", "Greska", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				
+			}
+		});
+		btnPrikaziKnjizicu.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int red = pacijentiTabela.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String jmbg = pacijentiTabela.getValueAt(red, 2).toString();
+					ZdravstvenaKnjizica knjizica=sistem.pronadjiKnjizicu(jmbg);
+					DodavanjeKnjizicePrikaz dkp=new DodavanjeKnjizicePrikaz(sistem, knjizica, 1, jmbg);
+					dkp.setVisible(true);
+				}
+			}
+		});
+		btnPrikaziLekara.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int red = pacijentiTabela.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String jmbg = pacijentiTabela.getValueAt(red, 9).toString();
+					Lekar lekar= sistem.pronadjiLekara(jmbg);
+					DodavanjeLekaraPrikaz dlp=new DodavanjeLekaraPrikaz(sistem, lekar, 1);
+					dlp.setVisible(true);
+				}
 			}
 		});
 	}

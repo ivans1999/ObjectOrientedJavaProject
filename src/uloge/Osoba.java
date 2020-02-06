@@ -18,7 +18,7 @@ public abstract class Osoba {
 		this.ime = "";
 		this.prezime = "";
 		this.jmbg = "";
-		this.pol = Pol.Muski;
+		this.pol = Pol.Zenski;
 		this.adresa = "";
 		this.brTelefona = "";
 		this.korisnicko = "";

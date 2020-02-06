@@ -22,7 +22,6 @@ public class MojMain {
 		
 		Login lProzor=new Login(sistem);
 		lProzor.setVisible(true);
-		
 	
 	}
 

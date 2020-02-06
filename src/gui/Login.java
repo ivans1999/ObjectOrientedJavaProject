@@ -11,6 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import funk.ZdrSistem;
+import guiprozoridisplay.PrikazPregleda;
 import net.miginfocom.swing.MigLayout;
 import uloge.Osoba;
 
@@ -84,7 +85,10 @@ public class Login extends JFrame {
 					Login.this.dispose();
 					Login.this.setVisible(false);
 				} else if (prijavljen.getUloga().equals("Pacijent")) {
-					System.out.println("Pacijent");
+					PrikazPregleda  pp = new PrikazPregleda(sistem,"Pacijent",prijavljen.getJmbg());
+					pp.setVisible(true);
+					Login.this.dispose();
+					Login.this.setVisible(false);
 				}
 
 			}

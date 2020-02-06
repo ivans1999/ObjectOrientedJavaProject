@@ -231,8 +231,7 @@ public class ZdrSistem {
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
-				String[] split = line.split("\\|");
-				// int l = split.length;
+				String[] split = line.split("\\|");	
 				String ime = split[0];
 				String prezime = split[1];
 				String jmbg = split[2];
@@ -536,22 +535,6 @@ public class ZdrSistem {
 		return null;
 	}
 
-	public boolean proveriTermin(String s, String jmbg,int i) {
-		boolean ok = true;
-		Lekar lekar = pronadjiLekara(jmbg);
-		String samoDatum = odbaciVreme(s);
-		int vremeTrazenog = pretvoriSveUMinute(s);
-		for (Pregledi pregled : pregledi) {
-			String samoDatumPostojuceg = odbaciVreme(VremeUString(pregled.getTermin(), formatTermina));
-			int vremePostojuceg = pretvoriSveUMinute(VremeUString(pregled.getTermin(), formatTermina));
-			int vrednost = Math.abs(vremeTrazenog - vremePostojuceg);
-			if ((15 >= vrednost) && (poredjenje(samoDatum, samoDatumPostojuceg)) && (lekar == pregled.getLekar()) && ((pregled.getStatus() == StatusPregleda.Zakazan))) {
-					ok = false;
-			}
-		}
-		return ok;
-	}
-
 	public int pretvoriSveUMinute(String s) {
 		String[] terminS = s.split("\\ ");
 		String[] vremeS = terminS[1].split("\\:");
@@ -559,12 +542,6 @@ public class ZdrSistem {
 		int min = Integer.parseInt(vremeS[1]);
 		int vreme = (sat * 60) + min;
 		return vreme;
-	}
-
-	public String odbaciVreme(String s) {
-		String[] termin = s.split("\\ ");
-		String samoDatum = termin[0];
-		return samoDatum;
 	}
 
 	public int samoSati(String s) {

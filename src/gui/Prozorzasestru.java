@@ -17,11 +17,11 @@ import guiprozoridisplay.PrikazSestara;
 import uloge.Osoba;
 
 public class Prozorzasestru extends JFrame {
+	
 	private JButton btnLekar=new JButton("Operacije nad lekarima");
 	private JButton btnSestra=new JButton("Operacije nad medicinskim sestrama");
 	private JButton btnPacijent=new JButton("Operacije nad pacijentima");
 	private JButton btnPregled=new JButton("Operacije nad pregledima");
-	private JButton btnRacun=new JButton("Napravi racun");
 	
 	private ZdrSistem sistem;
 	private Osoba osoba;
@@ -30,21 +30,20 @@ public class Prozorzasestru extends JFrame {
 		this.sistem=sistem;
 		this.osoba=osoba;
 		setTitle("Korisnik: "+osoba.getKorisnicko());
-		setSize(300, 200);
+		setSize(280, 160);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		initGUI();
 		iniTListeners();
 	}
 	
-	public void initGUI() {
-		
+	public void initGUI() {		
 		setLayout(new FlowLayout());
 		add(btnLekar);
 		add(btnSestra);
 		add(btnPacijent);
 		add(btnPregled);
-		add(btnRacun);
 	}
 	
 	public void iniTListeners() {
@@ -79,7 +78,7 @@ public class Prozorzasestru extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PrikazPregleda pp=new PrikazPregleda(sistem);
+				PrikazPregleda pp=new PrikazPregleda(sistem,"Sestra",osoba.getJmbg());
 				pp.setVisible(true);
 				
 			}

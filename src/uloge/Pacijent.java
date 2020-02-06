@@ -1,9 +1,5 @@
 package uloge;
 
-import uloge.Osoba;
-import uloge.Pacijent;
-import uloge.ZdravstvenaKnjizica;
-
 public class Pacijent extends Osoba {
 	
 	private Lekar izabraniLekar;

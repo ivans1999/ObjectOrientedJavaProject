@@ -1,3 +1,12 @@
-Milos|Teodosic|123345670|2|Zvezdaska 23|674322333|milos|teodosic|Pacijent|123456789
-Milan|Ninic|123123741|2|Kraljevic Marka 4|231111|mile|ninic|Pacijent|0503923454678
-Ivana|Ivanovic|7418852|1|Adresa1|123456|zorana|zoric|Pacijent|741852
+Nina|Ninic|1234777811|1|Beogradska 23|01222333|nina|nikolic|Pacijent|0503999810162
+Mile|Milic|123456741|2|Adresa3|231233|mile|milic|Pacijent|0503999810162
+Petra|Peric|7894561230|1|Petra Petrovica|123789|pera|peric|Pacijent|123456789
+Mila|Mili|789963|2|Adresa4|123|mila|milic|Pacijent|0503999810162
+Zika|Zikic|123|2|Adresa5|1111|zika|zikic|Pacijent|123456789
+Zorana|Zoric|7418852|1|Adresa1|123456|zorana|zoric|Pacijent|741852
+Milena|Zutic|00000|1|Adresa10|123456|milena|zutic|Pacijent|741852
+Nikola|Nikolic|123|1|Adresa5|12345663|nikola|00000|Pacijent|123456789
+Dario|Ziga|0123|2|Adresa11|123456|dario|ziga|Pacijent|123456789
+Mira|Mirkovic|123222|1|Adresa BB|9632111|mira|000000|Pacijent|123456789
+Mirko|Mulalic|3333|2|ASB|343234|mire|car|Pacijent|2906999770017
+Badr|Hari|23232323|2|Hereveen|323131|badboy|hari|Pacijent|2906999770017
